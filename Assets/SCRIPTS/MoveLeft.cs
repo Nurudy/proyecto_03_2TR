@@ -8,8 +8,10 @@ public class MoveLeft : MonoBehaviour
     public float leftBound; 
     private void Update()
     {
-        transform.Translate(Vector3.left * Time.deltaTime *
-        speed);
+        if (!playerControllerScript.gameOver)
+        {
+            transform.Translate(translation: Vector3.left * Time.deltaTime * speed, Space.World);
+        }
 
         if (transform.position.x < leftBound && gameObject.CompareTag("Obstacle)"))   //destruye los obstáculos cuando desaparecen de la escena o cuando cumplen su objetivo
         {
@@ -24,9 +26,9 @@ public class MoveLeft : MonoBehaviour
     private PlayerController playerControllerScript;
      private void Start()
     {
-        if (!playerControllerScript.gameOver)
-        {
-            transform.Translate(translation: Vector3.left * Time.deltaTime * speed);
-        }
+
+        playerControllerScript = FindObjectOfType<PlayerController>(); 
+        
+        
     }
 }
